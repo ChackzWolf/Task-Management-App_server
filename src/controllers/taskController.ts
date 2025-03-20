@@ -20,7 +20,8 @@ export class TaskController {
             const task = await this.taskService.createTask(taskData);
 
             // Emit socket event for real-time updates
-            io.to(req.user._id).emit('taskCreated', task);
+            console.log('sending new task to ')
+            io.to(req.user._id.toString()).emit('taskCreated', task);
 
             res.status(201).json(task);
         } catch (error) {
@@ -30,7 +31,7 @@ export class TaskController {
 
     async getAll(req: Request, res: Response): Promise<void>{
         try {
-            console.log('triggered')
+            console.log('triggered1')
             const tasks = await this.taskService.getTasks(req.user._id);
             console.log(tasks, 'tasks from controller');
             res.status(200).json(tasks);
@@ -38,8 +39,8 @@ export class TaskController {
             res.status(500).json({ message: error instanceof Error ? error.message : 'An error occurred' });
         }
     };
-
-    async getOne(req: Request, res: Response): Promise<void>{
+ 
+    async getOne(req: Request, res: Response): Promise<void>{ 
         try {
             const task = await this.taskService.getTaskById(req.params.id, req.user._id);
             res.status(200).json(task);
@@ -53,7 +54,7 @@ export class TaskController {
             const task = await this.taskService.updateTask(req.params.id, req.body, req.user._id);
     
             // Emit socket event for real-time updates
-            io.to(req.user._id).emit('taskUpdated', task);
+            io.to(req.user._id.toString()).emit('taskUpdated', task);
     
             res.status(200).json(task);
         } catch (error) {
@@ -66,7 +67,8 @@ export class TaskController {
             await this.taskService.deleteTask(req.params.id, req.user._id);
     
             // Emit socket event for real-time updates
-            io.to(req.user._id).emit('taskDeleted', req.params.id);
+            console.log(`Emitting taskDeleted to user: ${req.user._id}`);
+            io.to(req.user._id.toString()).emit("taskDeleted", req.params.id);
     
             res.status(200).json({ message: 'Task removed' });
         } catch (error) {

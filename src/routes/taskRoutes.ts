@@ -21,6 +21,9 @@ router.route('/:id')
   .put(taskController.update.bind(taskController))
   .delete(taskController.remove.bind(taskController));
 
+
 router.route('/stats').get(taskService.getTaskStats.bind(taskController));
+
+// router.route('/stats').get(taskService.getTaskStats.bind(taskController));
 
 export default router;
