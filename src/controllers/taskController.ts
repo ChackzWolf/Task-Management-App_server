@@ -12,6 +12,7 @@ export class TaskController {
 
     async create(req: Request, res: Response): Promise<void>{
         try {
+            console.log('triggered create task')
             const taskData = {
                 ...req.body,
                 userId: req.user._id,
@@ -31,9 +32,8 @@ export class TaskController {
 
     async getAll(req: Request, res: Response): Promise<void>{
         try {
-            console.log('triggered1')
+            console.log('triggered get all tasks')
             const tasks = await this.taskService.getTasks(req.user._id);
-            console.log(tasks, 'tasks from controller');
             res.status(200).json(tasks);
         } catch (error) {
             res.status(500).json({ message: error instanceof Error ? error.message : 'An error occurred' });

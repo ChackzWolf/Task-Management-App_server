@@ -13,5 +13,5 @@ export const config = {
     JWT_SECRET: process.env.JWT_SECRET || 'Na',
 
     // Client URL for CORS,
-    CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:5173',
+    CLIENT_URL: process.env.CLIENT_URL || 'https://task-management-app-one-blue.vercel.app',
 }

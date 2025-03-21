@@ -10,7 +10,7 @@ export let io: Server;
 export const initializeSocketIO = (server: http.Server): void => {
   io = new Server(server, {
     cors: {
-      origin: config.CLIENT_URL || 'http://localhost:5173',
+      origin: config.CLIENT_URL || 'https://task-management-app-one-blue.vercel.app',
       methods: ['GET', 'POST'],
     },
   });
