@@ -12,9 +12,10 @@ const allowedOrigins = [
   'https://task-management-app-one-blue.vercel.app',
   'https://task-management-4449px69v-jackson-cheriyans-projects.vercel.app'
 ];
+
 const corsOptions = {
   origin: (origin:any, callback:any) => {
-    if (allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -24,7 +25,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 
 
 // app.use(cors({
