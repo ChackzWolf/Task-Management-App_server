@@ -6,11 +6,16 @@ import { config } from './configs/env.configs';
 // Exported io variable to be used in other files
 export let io: Server;
 
+const allowedOrigins = [
+  'https://task-management-app-one-blue.vercel.app',
+  'https://task-management-4449px69v-jackson-cheriyans-projects.vercel.app'
+];
+
 // Initialize Socket.io
 export const initializeSocketIO = (server: http.Server): void => {
   io = new Server(server, {
     cors: {
-      origin: config.CLIENT_URL || 'https://task-management-app-one-blue.vercel.app',
+      origin: allowedOrigins,
       methods: ['GET', 'POST'],
     },
   });
