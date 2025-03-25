@@ -5,10 +5,10 @@ import { ITaskService } from '../interfaces/IServices/ITaskService';
 export class TaskController {
 
     taskService: ITaskService;
+
     constructor(taskService: ITaskService){
         this.taskService = taskService;
     }
-
 
     async create(req: Request, res: Response): Promise<void>{
         try {
